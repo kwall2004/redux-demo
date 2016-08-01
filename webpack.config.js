@@ -11,11 +11,12 @@ const PATHS = {
 };
 
 module.exports = {
+    devtool: 'source-map',
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
     entry: {
-        app: path.join(PATHS.src, 'main'),
+        app: path.join(PATHS.src, 'components/main'),
         vendor: ['react', 'react-dom', 'react-router']
     },
     output: {
