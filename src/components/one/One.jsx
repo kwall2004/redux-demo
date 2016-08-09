@@ -18,11 +18,13 @@ const One = React.createClass({
                     Component 1
                 </h1>
                 <button
-                    onClick={() => this.props.increment(0)}>
+                    onClick={() => this.props.increment('One')}>
                     +
                 </button>
                 <span>
-                    {this.props.counters.getIn([0, 'value'])}
+                    {this.props.counters.find(function(counter) {
+                        return counter.get('name') == 'One';
+                    }).get('value')}
                 </span>
                 <nav>
                     <ul>

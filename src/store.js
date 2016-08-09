@@ -6,12 +6,15 @@ import reducer from './reducers/index';
 const defaultState = {
     counters: fromJS([
         {
+            name: 'One',
             value: 0
         },
         {
+            name: 'Two',
             value: 0
         },
         {
+            name: 'OneA',
             value: 0
         }
     ])

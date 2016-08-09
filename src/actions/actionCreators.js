@@ -1,6 +1,6 @@
-export function increment(index) {
+export function increment(name) {
     return {
         type: 'INCREMENT',
-        index
+        name
     }
 }

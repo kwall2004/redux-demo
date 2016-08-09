@@ -9,11 +9,13 @@ const OneA = React.createClass({
                     Component 1A
                 </h1>
                 <button
-                    onClick={() => this.props.increment(1)}>
+                    onClick={() => this.props.increment('OneA')}>
                     +
                 </button>
                 <span>
-                    {this.props.counters.getIn([1, 'value'])}
+                    {this.props.counters.find(function(counter) {
+                        return counter.get('name') == 'OneA';
+                    }).get('value')}
                 </span>
             </div>
         )
