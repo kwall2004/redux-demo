@@ -1,11 +1,9 @@
-const route = {
-    path: 'two',
-    
-    getComponent(location, cb) {
-        require.ensure([], (require) => {
-            cb(null, require('./Two'));
-        });
-    }
-};
+module.exports = {
+  path: 'two',
 
-module.exports = route;
+  getComponent(location, cb) {
+    require.ensure([], (require) => {
+      cb(null, require('./Two'));
+    });
+  }
+};

@@ -1,11 +1,9 @@
-const route = {
-    path: 'home',
-    
-    getComponent(location, cb) {
-        require.ensure([], (require) => {
-            cb(null, require('./Home'));
-        });
-    }
-};
+module.exports = {
+  path: 'home',
 
-module.exports = route;
+  getComponent(location, cb) {
+    require.ensure([], (require) => {
+      cb(null, require('./Home'));
+    });
+  }
+};

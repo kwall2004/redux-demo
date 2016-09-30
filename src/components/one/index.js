@@ -1,19 +1,17 @@
-const route = {
-    path: 'one',
+module.exports = {
+  path: 'one',
 
-    getComponent(location, cb) {
-        require.ensure([], (require) => {
-            cb(null, require('./One'));
-        });
-    },
-    
-    getChildRoutes(location, cb) {
-        require.ensure([], (require) => {
-            cb(null, [
-                require('./oneA')
-            ]);
-        });
-    }
+  getComponent(location, cb) {
+    require.ensure([], (require) => {
+      cb(null, require('./One'));
+    });
+  },
+
+  getChildRoutes(location, cb) {
+    require.ensure([], (require) => {
+      cb(null, [
+        require('./oneA')
+      ]);
+    });
+  }
 };
-
-module.exports = route;
