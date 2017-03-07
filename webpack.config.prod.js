@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 const PATHS = {
   src: path.join(__dirname, 'src'),
@@ -10,11 +11,19 @@ const PATHS = {
 module.exports = {
   devtool: 'source-map',
   resolve: {
-    extensions: ['', '.js']
+    modules: ['node_modules'],
+    extensions: ['.js']
   },
   entry: {
     app: PATHS.src,
-    vendor: ['react', 'react-dom', 'react-router']
+    vendor: [
+      'immutable',
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux'
+    ]
   },
   output: {
     path: PATHS.dist,
@@ -23,25 +32,48 @@ module.exports = {
     publicPath: '/public/dist/'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        loaders: ['style/url', 'file?name=[name].[hash].css', 'extract', 'css'],
+        use: [
+          { loader: 'style-loader/url' },
+          {
+            loader: 'file-loader',
+            options: { name: '[name].[hash].css' }
+          },
+          { loader: 'extract-loader' },
+          { loader: 'css-loader' }
+        ],
         include: PATHS.src
       },
       {
         test: /\.less$/,
-        loaders: ['style/url', 'file?name=[name].[hash].css', 'extract', 'css', 'less'],
+        use: [
+          { loader: 'style-loader/url' },
+          {
+            loader: 'file-loader',
+            options: { name: '[name].[hash].css' }
+          },
+          { loader: 'extract-loader' },
+          { loader: 'css-loader' },
+          { loader: 'less-loader' }
+        ],
         include: PATHS.src
       },
       {
         test: /\.(js|jsx)$/,
-        loaders: ['babel'],
+        use: [
+          { loader: 'babel-loader' }
+        ],
         include: PATHS.src
       }
     ]
   },
   plugins: [
+    new ExtractTextWebpackPlugin({
+      filename: '[name].[contenthash].css',
+      allChunks: true
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
     }),
